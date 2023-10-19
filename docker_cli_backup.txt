@@ -1,0 +1,145 @@
+# nastool---继续维护版（不是Media-Saber）
+docker run -d \
+    --name nas-tools \
+    --hostname nas-tools \
+    --network=host \
+    --restart always \
+    -v /share/Container/nastool/config:/config \
+    -v /share/NAS:/NAS \
+    -e PUID=0 \
+    -e PGID=0 \
+    -e UMASK=000 \
+    -e NASTOOL_AUTO_UPDATE=true \
+    -e NASTOOL_CN_UPDATE=true \
+    -e REPO_URL="https://ghproxy.com/https://github.com/hsuyelin/nas-tools.git" \
+    hsuyelin/nas-tools
+
+# jellyfin
+docker run -d \
+    --name jellyfin \
+    --hostname jellyfin \
+    --device=/dev/dri:/dev/dri \
+    --network=host \
+    --restart always \
+    -e PUID=0 \
+    -e PGID=0 \
+    -v /share/Container/jellyfin/config:/config \
+    -v /share/Container/jellyfin/cache:/cache \
+    -v /share/NAS:/NAS \
+    nyanmisaka/jellyfin:latest
+
+# qbittorrent
+docker run -d \
+    --name qbittorrent \
+    --hostname qbittorrent \
+    --network=host \
+    --restart always \
+    -e PUID=0 \
+    -e PGID=0 \
+    -e WEBUI_PORT=8080 \
+    -v /share/Container/qbittorrent:/config \
+    linuxserver/qbittorrent:latest
+
+# transmission4
+docker run -d \
+    --name transmission \
+    --hostname transmission \
+    --network=host \
+    --restart always \
+    -e PUID=0 \
+    -e PGID=0 \
+    -e TRANSMISSION_WEB_HOME=/transmission-web-control/src \
+    -v /share/NAS:/NAS \
+    -v /share/Container/transmission/config:/config \
+    -v /share/Container/transmission/watch:/watch \
+    -v /share/Container/transmission/transmission-web-control:/transmission-web-control \
+    linuxserver/transmission:latest
+
+# firefox
+# 1
+docker run -d \
+    --name firefox \
+    -e TZ=Asia/Hong_Kong \
+    -e DISPLAY_WIDTH=1920 \
+    -e DISPLAY_HEIGHT=1080 \
+    -e KEEP_APP_RUNNING=1 \
+    -e ENABLE_CJK_FONT=1 \
+    -e VNC_PASSWORD=*** \
+    -p 5800:5800 \
+    -p 5900:5900 \
+    -v /share/Container/firefox/config:/config:rw \
+    --shm-size 4g jlesage/firefox
+# 2
+docker run -d \
+    --name firefox \
+    -e PUID=0 -e PGID=0 \
+    -e TZ=Asia/Hong_Kong \
+    -e DISPLAY_WIDTH=1920 \
+    -e DISPLAY_HEIGHT=1080 \
+    -e KEEP_APP_RUNNING=1 \
+    -e ENABLE_CJK_FONT=1 \
+    -e VNC_PASSWORD=*** \
+    -p 5800:5800 -p 5900:5900 \
+    -v /share/Container/firefox/config:/config \
+    --restart unless-stopped \
+    --shm-size 4g jlesage/firefox
+
+# portainer
+docker run -d \
+    -p 9000:9000 -p 8000:8000 \
+    --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /mydata/portainer/data:/data \
+    portainer/portainer
+
+# IYUUPlus
+docker run -d \
+    --name iyuuplus \
+    --hostname iyuuplus \
+    --network=host \
+    --restart always \
+    -e PUID=0 \
+    -e PGID=0 \
+    -v /share/Container/qbittorrent/qBittorrent/BT_backup:/BT_backup \
+    -v /share/Container/transmission/config/torrents:/torrents \
+    -v /share/Container/iyuuplus:/IYUU \
+    -v /share/Container/iyuuplus/db:/IYUU/db \
+    iyuucn/iyuuplus:latest
+
+# meida-saber
+docker run -d \
+    --name media-saber \
+    --hostname media-saber \
+    --network=host \
+    --restart always \
+    -v /share/Container/media-saber/config:/config \
+    -v /share/NAS:/NAS \
+    -e PUID=0 \
+    -e PGID=0 \
+    -e UMASK=000 \
+    -e MEDIA_SABER_AUTH_EMAIL='xxx@qq.com' \
+    -e MEDIA_SABER_AUTH_SLOGAN='xxx' \
+    -e MEDIA_SABER_AUTO_UPDATE=true \
+    xylplm/media-saber:latest
+
+# OCR
+docker run -d \
+    --name Baidu-OCR \
+    --hostname Baidu-OCR \
+    --network=host \
+    --restart always \
+    -e OCR_APP_ID='***' \
+    -e OCR_API_KEY='***' \
+    -e OCR_SECRET_KEY='***' \
+    xylplm/media-saber-baidu-ocr
+
+# vertex
+docker run -d \
+    --name vertex \
+    --hostname vertex \
+    --network=host \
+    -v /mnt/sda/Configs/vertex:/vertex \
+    -e TZ=Asia/Shanghai \
+    --restart unless-stopped \
+    lswl/vertex:stable
