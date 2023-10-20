@@ -55,34 +55,20 @@ docker run -d \
     -v /share/Container/transmission/transmission-web-control:/transmission-web-control \
     linuxserver/transmission:latest
 
-# firefox
-# 1
+# Firefox
+# Doc[https://github.com/jlesage/docker-firefox]
 docker run -d \
-    --name firefox \
+    --name=firefox-1 \
     -e TZ=Asia/Hong_Kong \
     -e DISPLAY_WIDTH=1920 \
     -e DISPLAY_HEIGHT=1080 \
     -e KEEP_APP_RUNNING=1 \
     -e ENABLE_CJK_FONT=1 \
-    -e VNC_PASSWORD=*** \
+    -e VNC_PASSWORD=13579.00 \
     -p 5800:5800 \
-    -p 5900:5900 \
     -v /share/Container/firefox/config:/config:rw \
-    --shm-size 4g jlesage/firefox
-# 2
-docker run -d \
-    --name firefox \
-    -e PUID=0 -e PGID=0 \
-    -e TZ=Asia/Hong_Kong \
-    -e DISPLAY_WIDTH=1920 \
-    -e DISPLAY_HEIGHT=1080 \
-    -e KEEP_APP_RUNNING=1 \
-    -e ENABLE_CJK_FONT=1 \
-    -e VNC_PASSWORD=*** \
-    -p 5800:5800 -p 5900:5900 \
-    -v /share/Container/firefox/config:/config \
-    --restart unless-stopped \
-    --shm-size 4g jlesage/firefox
+    --shm-size 4g \
+    jlesage/firefox
 
 # portainer
 docker run -d \
@@ -143,3 +129,6 @@ docker run -d \
     -e TZ=Asia/Shanghai \
     --restart unless-stopped \
     lswl/vertex:stable
+
+# 查看映射目录
+docker inspect id | grep Mounts -A 50
