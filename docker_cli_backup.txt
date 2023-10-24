@@ -55,6 +55,19 @@ docker run -d \
     -v /share/Container/qbittorrent:/config \
     linuxserver/qbittorrent:latest
 
+# 453Bmini
+docker run -d \
+	--name qbittorrent \
+	--hostname qbittorrent \
+	--network=host \
+	--restart always \
+	-e PUID=0 \
+	-e PGID=0 \
+	-e WEBUI_PORT=8080 \
+	-v /share/Container/qbittorrent:/config \
+	-v /share/HDD-16/Download:/Download \
+	linuxserver/qbittorrent:latest
+
 # transmission4
 docker run -d \
     --name transmission \
@@ -69,6 +82,21 @@ docker run -d \
     -v /share/Container/transmission/watch:/watch \
     -v /share/Container/transmission/transmission-web-control:/transmission-web-control \
     linuxserver/transmission:latest
+
+# 453Bmini
+docker run -d \
+	--name transmission \
+	--hostname transmission \
+	--network=host \
+	--restart always \
+	-e PUID=0 \
+	-e PGID=0 \
+	-e TRANSMISSION_WEB_HOME=/transmission-web-control/src \
+	-v /share/HDD-16/Download:/Download \
+	-v /share/Container/transmission/config:/config \
+	-v /share/Container/transmission/watch:/watch \
+	-v /share/Container/transmission/transmission-web-control:/transmission-web-control \
+	linuxserver/transmission:latest
 
 # Firefox
 # Doc[https://github.com/jlesage/docker-firefox]
@@ -124,6 +152,22 @@ docker run -d \
     -e MEDIA_SABER_AUTO_UPDATE=true \
     xylplm/media-saber:latest
 
+# 453Bmini
+docker run -d \
+	--name media-saber \
+	--hostname media-saber \
+	--network=host \
+	--restart always \
+	-v /share/Container/media-saber/config:/config \
+	-v /share/HDD-16:/HDD-16 \
+	-e PUID=0 \
+	-e PGID=0 \
+	-e UMASK=000 \
+	-e MEDIA_SABER_AUTH_EMAIL='xianxt0570@gmail.com' \
+	-e MEDIA_SABER_AUTH_SLOGAN='mediaPT2023' \
+	-e MEDIA_SABER_AUTO_UPDATE=true \
+	xylplm/media-saber:latest
+
 # OCR
 docker run -d \
     --name Baidu-OCR \
@@ -144,6 +188,21 @@ docker run -d \
     -e TZ=Asia/Shanghai \
     --restart unless-stopped \
     lswl/vertex:stable
+
+# DDNSTO
+# 453Bmini
+# -v /etc/localtime:/etc/localtime:ro \
+# --restart unless-stopped 重启不停止
+docker run -d \
+	--name=ddnsto \
+	--network host \
+	--restart unless-stopped \
+	-e TOKEN=133743bc-cba8-4d71-8025-80ba3cb8216f \
+	-e DEVICE_IDX=0 \
+	-v /share/Container/ddnsto/config:/etc/localtime:ro \
+	-e PUID=0 \
+	-e PGID=0 \
+	linkease/ddnsto
 
 # 查看映射目录
 docker inspect id | grep Mounts -A 50
