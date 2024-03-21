@@ -40,7 +40,6 @@ docker run -d \
     -v /share/Container/jellyfin/config:/config \
     -v /share/Container/jellyfin/cache:/cache \
     -v /share/HDD-16:/HDD-16 \
-    -v /share/HDD-4:/HDD-4 \
     nyanmisaka/jellyfin:latest
 
 # qbittorrent
@@ -67,6 +66,15 @@ docker run -d \
 	-v /share/Container/qbittorrent:/config \
 	-v /share/HDD-16/Download:/Download \
 	linuxserver/qbittorrent:latest
+
+# jacksky6/qb-web
+# http://192.168.5.121:8080/
+docker run -d \
+        --restart always \
+        --name qb-web-01 \
+        -p 8088:80 \
+        -e QBHOSTPORT=http://192.168.5.121:8080 \
+        qb-web
 
 # transmission4
 docker run -d \
@@ -119,7 +127,15 @@ docker run -d \
     --name portainer \
     --restart=always \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /mydata/portainer/data:/data \
+    -v /share/Container/portainer/data:/data \
+    portainer/portainer
+docker run -d \
+    -p 8000:8000 \
+    -p 9000:9000 \
+    --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /share/Container/portainer/data:/data \
     portainer/portainer
 
 # IYUUPlus
@@ -203,6 +219,14 @@ docker run -d \
 	-e PUID=0 \
 	-e PGID=0 \
 	linkease/ddnsto
+
+# cookiecloud
+docker run -d \
+    -e API_ROOT=/cookie \
+    -p=8088:8088 \
+    easychen/cookiecloud:latest
+
+docker run -p=8088:8088 easychen/cookiecloud:latest
 
 # 查看映射目录
 docker inspect id | grep Mounts -A 50
