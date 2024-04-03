@@ -101,16 +101,15 @@ docker run -d \
 # Firefox
 # Doc[https://github.com/jlesage/docker-firefox]
 docker run -d \
-    --name=firefox-1 \
+    --name=firefox2 \
     -e TZ=Asia/Hong_Kong \
     -e DISPLAY_WIDTH=1920 \
     -e DISPLAY_HEIGHT=1080 \
     -e KEEP_APP_RUNNING=1 \
-    -e ENABLE_CJK_FONT=1 \
-    -e VNC_PASSWORD=13579.00 \
+    -e VNC_PASSWORD=123456.789 \
     -p 5800:5800 \
-    -v /share/Container/firefox/config:/config:rw \
-    --shm-size 4g \
+    -v /share/Container/firefox2/config:/config:rw \
+    --shm-size 2g \
     jlesage/firefox
 
 # portainer
@@ -183,8 +182,8 @@ docker run -d \
 docker run -d \
     --name vertex \
     --hostname vertex \
-    --network=host \
-    -v /mnt/sda/Configs/vertex:/vertex \
+    -p 9000:3000 \
+    -v /share/Container/vertex:/vertex \
     -e TZ=Asia/Shanghai \
     --restart unless-stopped \
     lswl/vertex:stable
