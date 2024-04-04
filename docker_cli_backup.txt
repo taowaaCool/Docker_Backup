@@ -40,6 +40,7 @@ docker run -d \
     -v /share/Container/jellyfin/config:/config \
     -v /share/Container/jellyfin/cache:/cache \
     -v /share/HDD-16:/HDD-16 \
+    -v /share/HDD-4:/HDD-4 \
     nyanmisaka/jellyfin:latest
 
 # qbittorrent
