@@ -170,7 +170,7 @@ docker run -d \
 
 # 453Bmini
 docker run -d \
-	--name media-saber \
+	--name media-saber-dev \
 	--hostname media-saber \
 	--network=host \
 	--restart always \
@@ -182,7 +182,7 @@ docker run -d \
 	-e MEDIA_SABER_AUTH_EMAIL='xianxt0570@gmail.com' \
 	-e MEDIA_SABER_AUTH_SLOGAN='mediaPT2023' \
 	-e MEDIA_SABER_AUTO_UPDATE=true \
-	xylplm/media-saber:latest
+	xylplm/media-saber:latest-beta
 
 # OCR
 docker run -d \
