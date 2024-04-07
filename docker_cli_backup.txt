@@ -244,5 +244,12 @@ docker run -d \
 
 docker run -p=8088:8088 easychen/cookiecloud:latest
 
+# halo-blog
+docker run -d \
+    --name halo \
+    -p 8090:8090 \
+    -v /share/Container/halo:/root/.halo2 \
+    halohub/halo:2.14
+
 # 查看映射目录
 docker inspect id | grep Mounts -A 50
