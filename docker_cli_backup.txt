@@ -251,11 +251,11 @@ docker run -d \
 
 # cookiecloud
 docker run -d \
-    -e API_ROOT=/cookie \
-    -p=8088:8088 \
+    --name cookiecloud \
+    --hostname cookiecloud \
+    --restart=always \
+    -p 8089:8088 \
     easychen/cookiecloud:latest
-
-docker run -p=8088:8088 easychen/cookiecloud:latest
 
 # halo-blog
 docker run -d \
@@ -266,5 +266,3 @@ docker run -d \
 
 # 查看映射目录
 docker inspect id | grep Mounts -A 50
-
-// ok
