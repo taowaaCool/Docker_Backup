@@ -55,7 +55,7 @@ docker run -d \
     -v /share/Container/qbittorrent:/config \
     linuxserver/qbittorrent:latest
 
-# 453Bmini
+# 453Bmini port: 8080
 docker run -d \
 	--name qbittorrent \
 	--hostname qbittorrent \
@@ -65,6 +65,19 @@ docker run -d \
 	-e PGID=0 \
 	-e WEBUI_PORT=8080 \
 	-v /share/Container/qbittorrent:/config \
+	-v /share/HDD-16/Download:/Download \
+	linuxserver/qbittorrent:latest
+
+# 453Bmini qBittorrent 刷流 port: 8082
+docker run -d \
+	--name qbittorrent-flush \
+	--hostname qbittorrent \
+	--network=host \
+	--restart always \
+	-e PUID=0 \
+	-e PGID=0 \
+	-e WEBUI_PORT=8082 \
+	-v /share/Container/qbittorrent-flush:/config \
 	-v /share/HDD-16/Download:/Download \
 	linuxserver/qbittorrent:latest
 
