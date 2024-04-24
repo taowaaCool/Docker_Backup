@@ -61,9 +61,9 @@ docker run -d \
 	--hostname qbittorrent \
 	--network=host \
 	--restart always \
+	-e WEBUI_PORT=8080 \
 	-e PUID=0 \
 	-e PGID=0 \
-	-e WEBUI_PORT=8080 \
 	-v /share/Container/qbittorrent:/config \
 	-v /share/HDD-16/Download:/Download \
 	linuxserver/qbittorrent:latest
@@ -119,6 +119,20 @@ docker run -d \
 	-v /share/Container/transmission/watch:/watch \
 	-v /share/Container/transmission/transmission-web-control:/transmission-web-control \
 	linuxserver/transmission:latest
+
+# flood
+# /share/Container/flood/config
+docker run -d \
+    --name=flood \
+    --restart unless-stopped \
+    -e PUID=0 \
+    -e PGID=0 \
+    -v /share/Container/flood/config:/config \
+    -v /share/HDD-16/Download:/Download \
+    -p 5245:3000 \
+    -p 9091 \
+    -p 8080 \
+    jesec/flood:master
 
 # Firefox
 # Doc[https://github.com/jlesage/docker-firefox]
