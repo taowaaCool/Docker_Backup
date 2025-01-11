@@ -192,7 +192,7 @@ docker run -d \
 	-e PUID=0 \
 	-e PGID=0 \
 	-e UMASK=000 \
-	-e MEDIA_SABER_AUTH_EMAIL='xxx0570@gmail.com' \
+	-e MEDIA_SABER_AUTH_EMAIL='xxx@gmail.com' \
 	-e MEDIA_SABER_AUTH_SLOGAN='password' \
 	-e MEDIA_SABER_AUTO_UPDATE=true \
 	xylplm/media-saber:latest
@@ -222,7 +222,7 @@ docker run -d \
 	-e PUID=0 \
 	-e PGID=0 \
 	-e UMASK=000 \
-	-e MEDIA_SABER_AUTH_EMAIL='xxx0@gmail.com' \
+	-e MEDIA_SABER_AUTH_EMAIL='xxx@gmail.com' \
 	-e MEDIA_SABER_AUTH_SLOGAN='password' \
 	-e MEDIA_SABER_AUTO_UPDATE=true \
 	xylplm/media-saber:go-dev
