@@ -266,3 +266,15 @@ docker run -d \
 
 # 查看映射目录
 docker inspect id | grep Mounts -A 50
+
+# 拉取 media-saber amd64 镜像，保存至下载目录
+skopeo copy --override-arch amd64 --override-os linux docker://xylplm/media-saber:go-dev docker-archive:media-saber_amd64.tar dir://User/download
+
+# test
+skopeo copy docker://busybox:latest dir:/var/lib/images/busybox
+xylplm/media-saber:go-dev
+xylplm/media-saber:latest-beta
+skopeo copy --multi-arch all docker://xylplm/media-saber:latest-beta docker-archive:media-saber.tar
+
+skopeo copy docker://<镜像名称>:<标签> docker-archive:<导出文件名>.tar
+skopeo copy docker://ubuntu:20.04 docker-archive:ubuntu_20.04.tar
