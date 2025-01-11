@@ -192,8 +192,8 @@ docker run -d \
 	-e PUID=0 \
 	-e PGID=0 \
 	-e UMASK=000 \
-	-e MEDIA_SABER_AUTH_EMAIL='xianxt0570@gmail.com' \
-	-e MEDIA_SABER_AUTH_SLOGAN='mediaPT2023' \
+	-e MEDIA_SABER_AUTH_EMAIL='xxx0570@gmail.com' \
+	-e MEDIA_SABER_AUTH_SLOGAN='password' \
 	-e MEDIA_SABER_AUTO_UPDATE=true \
 	xylplm/media-saber:latest
 # dev
@@ -207,11 +207,25 @@ docker run -d \
 	-e PUID=0 \
 	-e PGID=0 \
 	-e UMASK=000 \
-	-e MEDIA_SABER_AUTH_EMAIL='xianxt0570@gmail.com' \
-	-e MEDIA_SABER_AUTH_SLOGAN='mediaPT2023' \
+	-e MEDIA_SABER_AUTH_EMAIL='xxx@gmail.com' \
+	-e MEDIA_SABER_AUTH_SLOGAN='password' \
 	-e MEDIA_SABER_AUTO_UPDATE=true \
 	xylplm/media-saber:latest-beta
-	xylplm/media-saber:latest-beta
+# xylplm/media-saber:go-dev
+docker run -d \
+	--name media-saber-go \
+	--hostname media-saber-go \
+	--network=host \
+	--restart always \
+	-v /share/Container/media-saber/config:/config \
+	-v /share/HDD-16:/HDD-16 \
+	-e PUID=0 \
+	-e PGID=0 \
+	-e UMASK=000 \
+	-e MEDIA_SABER_AUTH_EMAIL='xxx0@gmail.com' \
+	-e MEDIA_SABER_AUTH_SLOGAN='password' \
+	-e MEDIA_SABER_AUTO_UPDATE=true \
+	xylplm/media-saber:go-dev
 
 # OCR
 docker run -d \
